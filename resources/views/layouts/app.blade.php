@@ -102,7 +102,7 @@
         {{-- <script type="text/javascript" src="/theme-scripts/hs-mega-menu.js"></script> --}}
         {{-- <script type="text/javascript" src="/theme-scripts/hs-step-form.js"></script> --}}
 
-        @vite(['resources/js/app.js'])
+        @vite(['resources/js/app.js', 'resources/css/app.css'])
     </head>
     <body class="font-sans antialiased">
         <header id="header" class="navbar navbar-expand-lg navbar-bordered">
