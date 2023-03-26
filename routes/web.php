@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OpdrachtController;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Redirect;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return Redirect::to('/dashboard');
 });
 
 Route::get('/dashboard', function () {
@@ -28,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdrachten.list');
+    Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
+    Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'delete'])->name('opdracht.delete');
 });
 
 require __DIR__.'/auth.php';

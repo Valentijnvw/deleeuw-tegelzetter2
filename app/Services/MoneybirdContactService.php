@@ -25,22 +25,43 @@ class MoneybirdContactService
 
     public function insertOrUpdateContact()
     {
+        // Contact ophalen (of aanmaken)
         $this->contact = MoneybirdContact::where('id', $this->moneybirdId)->firstOr(function() {
-            $this->contact = new MoneybirdContact();
-            $this->contact->id = $this->moneybirdId;
-            $this->updateData();
-            return $this->contact;
+            $newContact = new MoneybirdContact();
+            $newContact->id = $this->moneybirdId;
+            return $newContact;
         });
-    }
-
-    public function updateData()
-    {
+        // API aanvraag
         try {
             $retrievedContact = \Moneybird::contact()->find($this->contact->id);
         } catch(\Exception $e) {
             throw new \Error("Contact niet gevonden");
         }
-        $this->contact->fill($retrievedContact->attributes());
+        $attr = $retrievedContact->attributes();
+        // Verwerken in DB
+        // $this->contact->fill($retrievedContact->attributes());
+        $this->contact->fill([
+            "id" => $attr["id"],
+            "email" => $attr["email"],
+            'firstname' => $attr["firstname"],
+            'lastname' => $attr["lastname"],
+            'company_name' => $attr["company_name"],
+            'address1' => $attr["address1"],
+            'address2' => $attr["address2"],
+            'zipcode' => $attr["zipcode"],
+            'city' => $attr["city"],
+            'country' => $attr["country"],
+            'phone' => $attr["phone"],
+        ]);
         $this->contact->save();
+    }
+
+    /* 
+        
+    */
+    public function updateData()
+    {
+
+        
     }
 }

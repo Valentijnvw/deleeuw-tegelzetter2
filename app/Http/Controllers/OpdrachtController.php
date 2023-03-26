@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\Opdracht;
 use App\Models\User;
@@ -17,6 +18,13 @@ class OpdrachtController extends Controller
             $opdracht['contact'] = $opdracht->moneybirdContact;
             return $opdracht;
         });
-        return view('opdracht.list');
+        return view('opdracht.list', [
+            'opdrachten' => $opdrachten
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+        return Redirect::to('/');
     }
 }

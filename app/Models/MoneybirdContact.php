@@ -19,6 +19,17 @@ class MoneybirdContact extends Model
     //     $this->save();
     // }
 
+    // bedrijfsnaam of volledige naam
+    public function displayName()
+    {
+        return $this->isBedrijf() ? $this->firstname . " " . $this->lastname : $this->company_name;
+    }
+
+    public function isBedrijf()
+    {
+        return empty($this->company_name);
+    }
+
     protected $fillable = [
         'id',
         'email',
