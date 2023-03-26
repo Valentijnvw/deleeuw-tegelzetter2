@@ -5,7 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/forms": "^0.5.3",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
         "axios": "^1.1.2",
@@ -15,9 +15,16 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.5",
+        "@fullcalendar/daygrid": "^6.1.5",
+        "@fullcalendar/list": "^6.1.5",
+        "@fullcalendar/timegrid": "^6.1.5",
+        "@popperjs/core": "^2.11.7",
+        "bootstrap": "^5.2.3",
         "bootstrap-icons": "^1.10.3",
         "datatables": "^1.10.18",
         "jquery": "^3.6.4",
+        "popper.js": "^1.16.1",
         "tom-select": "^2.2.2"
     }
 }

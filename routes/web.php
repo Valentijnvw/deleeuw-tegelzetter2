@@ -32,7 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
+    Route::get('/opdracht/aanmaken', [OpdrachtController::class, 'create'])->name('opdracht.create');
+    
     Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'delete'])->name('opdracht.delete');
+
+    Route::get('/opdrachten-kalender', [OpdrachtController::class, 'calendar'])->name('calendar');
+    
 });
 
 require __DIR__.'/auth.php';

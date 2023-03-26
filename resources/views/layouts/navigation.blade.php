@@ -19,6 +19,10 @@
                     <x-nav-link :href="route('opdracht.list')" :active="request()->routeIs('opdracht.list')">
                         {{ __('Opdrachten') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('calendar')" :active="request()->routeIs('calendar')">
+                        {{ __('Agenda') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -49,7 +53,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Uitloggen') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
