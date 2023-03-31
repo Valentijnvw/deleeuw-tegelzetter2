@@ -3,6 +3,14 @@
             <div class="flex flex-row">
                 <div class="basis-1/4">
                     Binnenkort beschikbaar
+                    <input type="text" name="Naam" class="form-input" />
+                    <x-moneybird-contact-selector name="test123" placeholder="456"/>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
                 </div>
                 <div class="basis-1/4">
                     
