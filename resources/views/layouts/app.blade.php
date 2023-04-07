@@ -1,45 +1,40 @@
 @props(['title' => config('app.name', 'Laravel'), 'header'])
 
-<!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>{{ $title }}</title>
+    <!-- Title -->
+    <title>Hello, world!</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./favicon.ico">
 
-        <!-- Scripts -->
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
-        @vite(['resources/js/app.js', 'resources/css/app.css'])
-    </head>
-    <body class="font-sans antialiased">
-        <header id="header" class="navbar navbar-expand-lg navbar-bordered">
-            <div class="container">
-                @include('layouts.navigation')
-            </div>
-        </header>
+    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}" ></script>
+    <script src="{{ Vite::asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}" ></script>
+    <script src="{{ Vite::asset('resources/js/hs/hs.core.js') }}" ></script>
+    <script src="{{ Vite::asset('resources/js/hs/hs.datatables.js') }}" ></script>
+    <script src="{{ Vite::asset('resources/js/hs/hs-script.js') }}" ></script>
+  </head>
 
+  <body>
+    @include('layouts.navigation')
+    <div class="content container">
         @if($header)
-            <header class="bg-white shadow">
-                <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $header }}</h1>
-                </div>
-            </header>
-        @endif
-
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {{ $slot }}
+        <div class="page-header">
+            <h1 class="page-header-title mt-5">{{$header}}</h1>
         </div>
-
-        <script type="text/javascript" src=""></script>
-
-        @stack('scripts')
-
-    </body>
+        @endif
+        {{ $slot }}
+    </div>
+  </body>
 </html>
+
