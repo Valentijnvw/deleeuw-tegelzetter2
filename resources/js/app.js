@@ -2,6 +2,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 import.meta.glob([
   '../img/**',
+  './hs/*'
 ]);
 
 import 'fontawesome-free/js/fontawesome.min.js';
