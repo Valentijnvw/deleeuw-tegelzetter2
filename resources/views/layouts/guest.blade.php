@@ -18,7 +18,6 @@
 
     @vite(['resources/js/app.js', 'resources/scss/theme.scss'])
 
-    <script src="{{ Vite::asset('resources/js/hs/hs.core.js') }}" ></script>
   </head>
 
   <body>
