@@ -3,16 +3,16 @@
   HSCore.components.HSDatatables.init('.js-datatable')
 </script>
 @endpush
-<x-app-layout>
+<x-app-layout title="Opdrachten" header="Opdrachten">
   
   <a class="btn btn-secondary mb-3" href="{{ route('opdracht.create') }}" style="width: 200px;">
     <i class="fas fa-plus"></i> Opdracht toevoegen </a>
     <div class="card">
 
 
-        <div class="card-header">
+        {{-- <div class="card-header">
           <h4 class="card-header-title">Users</h4>
-        </div>
+        </div> --}}
       
         <!-- Table -->
         <div class="table-responsive datatable-custom">

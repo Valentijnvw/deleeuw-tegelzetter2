@@ -1,10 +1,10 @@
-{{-- @push("scripts")
+@push("scripts")
 <script type="module">
-  import flatpickr from "/node_modules/flatpickr";
-  console.log(flatpickr)
-  alert("H")
+  flatpickr('.flatpickr', {
+    dateFormat: "d-m-Y"
+  });
 </script>
-@endpush --}}
+@endpush
 
 <x-app-layout title="Opdracht toevoegen" header="Opdracht toevoegen">
   <div class="row justify-content-center">

@@ -19,6 +19,7 @@ window.TomSelect = TomSelect;
 import 'tom-select/dist/css/tom-select.bootstrap5.css'
 
 import flatpickr from "/node_modules/flatpickr";
+import "/node_modules/flatpickr/dist/flatpickr.css";
 window.flatpickr = flatpickr;
 
 import { Calendar } from '@fullcalendar/core';

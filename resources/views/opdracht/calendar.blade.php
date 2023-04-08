@@ -15,7 +15,7 @@
 	</script>
 @endpush
 
-<x-app-layout>
+<x-app-layout title="Agenda" header="Agenda">
 
 <!-- Fullcalendar -->
 {{-- <div id="js-fullcalendar-draggable" class="fullcalendar-custom"></div> --}}
