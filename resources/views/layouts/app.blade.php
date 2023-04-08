@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Hello, world!</title>
+    <title>{{ $title}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="./favicon.ico">
@@ -16,12 +16,25 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/scss/theme.scss'])
 
-    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}" ></script>
-    <script src="{{ Vite::asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}" ></script>
+    {{-- HS core --}}
     <script src="{{ Vite::asset('resources/js/hs/hs.core.js') }}" ></script>
+    {{-- Jquery --}}
+    <script src="{{ Vite::asset('node_modules/jquery/dist/jquery.min.js') }}" ></script>
+    {{-- Datatables --}}
+    <script src="{{ Vite::asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}" ></script>
     <script src="{{ Vite::asset('resources/js/hs/hs.datatables.js') }}" ></script>
+    {{-- FullCalendar --}}
+    <script src="{{ Vite::asset('node_modules/fullcalendar/index.global.min.js') }}"></script>
+    <script src="{{ Vite::asset('node_modules/fullcalendar/timegrid/index.global.min.js') }}"></script>
+    <script src="{{ Vite::asset('node_modules/fullcalendar/core/locales/nl.global.min.js') }}"></script>
+    <script src="{{ Vite::asset('resources/js/hs/hs.fullcalendar.js') }}" ></script>
+    {{-- Tom select --}}
+    <script src="{{ Vite::asset('node_modules/tom-select/dist/js/tom-select.complete.min.js') }}" ></script>
+    <script src="{{ Vite::asset('resources/js/hs/hs.tom-select.js') }}" ></script>
+
+    {{-- Script --}}
     <script src="{{ Vite::asset('resources/js/hs/hs-script.js') }}" ></script>
   </head>
 
@@ -34,7 +47,8 @@
         </div>
         @endif
         {{ $slot }}
-    </div>
+        
+        @stack('scripts')
   </body>
 </html>
 

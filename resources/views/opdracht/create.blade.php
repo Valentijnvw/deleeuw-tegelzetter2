@@ -1,26 +1,49 @@
 <x-app-layout title="Opdracht toevoegen" header="Opdracht toevoegen">
-        <form>
-            <div class="flex flex-row">
-                <div class="basis-1/4">
-                    Binnenkort beschikbaar
-                    <input type="text" name="Naam" />
-                    <x-moneybird-contact-selector name="test123" placeholder="456"/>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- End Page Header -->
+      <div class="card p-4">
+        <form method="POST" action="{{ route('opdracht.store') }}">
+          @csrf
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Opdracht titel</label>
+                  <input type="text" name="titel" class="form-control" placeholder="Opdracht naam">
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label">Selecteer een klant</label>
+                  
+                  <x-moneybird-contact-selector name="klant_moneybird_id" placeholder="Selecteer een klant..."/>
+                </div>
+                
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Start datum</label>
+                  <input type="text" name="start_datum" class="form-control flatpickr" placeholder="Start datum">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Eind datum</label>
+                  <input type="text" name="eind_datum" class="form-control flatpickr" placeholder="Eind datum">
+                </div>
 
-                    {{-- <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div> --}}
-                </div>
-                <div class="basis-1/4">
-                    
-                </div>
+              </div>
             </div>
-            
-          
-            <div class="mt-6 flex items-center justify-end gap-x-6">
-              <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-              <button type="submit" class="rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+            <div class="mb-3">
+              <label class="form-label" for="exampleFormControlInput1">Omschrijving</label>
+              <textarea type="text" name="omschrijving" class="form-control" placeholder="Opdracht omschrijving" rows="4">
+              </textarea>
             </div>
-          </form>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check ms-1"></i> Opdracht toevoegen</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </x-app-layout>

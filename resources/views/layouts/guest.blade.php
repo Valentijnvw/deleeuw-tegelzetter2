@@ -1,31 +1,59 @@
-<!DOCTYPE html>
+@props(['title' => config('app.name', 'Laravel'), 'header'])
+
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Title -->
+    <title>{{ $title }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./favicon.ico">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-                    <img src="{{ Vite::asset('resources/img/deleeuw-logo.png') }}" width="150px" />
-                </a>
-            </div>
+    @vite(['resources/js/app.js', 'resources/scss/theme.scss'])
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+    <script src="{{ Vite::asset('resources/js/hs/hs.core.js') }}" ></script>
+  </head>
+
+  <body>
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(./assets/svg/components/card-6.svg);">
+        <!-- Shape -->
+        <div class="shape shape-bottom zi-1">
+            <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+            <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
+            </svg>
+        </div>
+        <!-- End Shape -->
+        </div>
+
+        <!-- Content -->
+        <div class="container py-5 py-sm-7">
+        <a class="d-flex justify-content-center mb-5" href="./index.html">
+            <img class="zi-2" src="{{ Vite::asset('resources/img/deleeuw-logo.png') }}" alt="Image Description" style="width: 8rem;">
+        </a>
+
+        <div class="mx-auto" style="max-width: 30rem;">
+            <!-- Card -->
+            <div class="card card-lg mb-5">
+            <div class="card-body">
                 {{ $slot }}
             </div>
+            </div>
+            <!-- End Card -->
+
         </div>
-    </body>
+        </div>
+        <!-- End Content -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+  </body>
 </html>
+

@@ -5,11 +5,11 @@
 
 @push('scripts')
 
-<script type="module">
+<script>
     var settings = {
 		valueField: 'moneybird_id',
 		searchField: ['first_name','last_name', 'company_name', 'email', 'phone', 'city'],
-        placeholder: {{ $placeholder }},
+        placeholder: "{{ $placeholder }}",
 		// fetch remote data
 		load: function(query, callback) {
 			var url = '/api/moneybird-test?q=' + encodeURIComponent(query);

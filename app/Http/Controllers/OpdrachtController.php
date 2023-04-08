@@ -28,6 +28,29 @@ class OpdrachtController extends Controller
         return view('opdracht.create');
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'titel' => 'required',
+            'klant_moneybird_id' => 'required',
+            'start_datum' => 'date|required',
+            'eind_datum' => 'date|required',
+            'omschrijving' => '',
+        ]);
+        
+        $validated["start_datum"] = \Carbon\Carbon::parse($validated["start_datum"])->format("Y-m-d");
+        $validated["eind_datum"] = \Carbon\Carbon::parse($validated["eind_datum"])->format("Y-m-d");
+
+        $moneybirdContactService = new MoneybirdContactService($validated["klant_moneybird_id"]);
+        $moneybirdContactService->insertOrUpdateContact();
+
+        $opdracht = new Opdracht();
+        $opdracht->fill($validated);
+        $opdracht->save();
+
+        return Redirect::route('opdracht.list');
+    }
+
     public function calendar(Request $request): View
     {
         $opdrachten = Opdracht::all()->map(function($opdracht) {
