@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OpdrachtController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Redirect;
@@ -34,11 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
     Route::get('/opdracht/aanmaken', [OpdrachtController::class, 'create'])->name('opdracht.create');
     Route::post('/opdracht/store', [OpdrachtController::class, 'store'])->name('opdracht.store');
-    
     Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'delete'])->name('opdracht.delete');
-
-    Route::get('/opdrachten-kalender', [OpdrachtController::class, 'calendar'])->name('calendar');
     
+
+    Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
+   
+    Route::get('/gebruikers', [UserController::class, 'list'])->name('gebruikers.lijst');
 });
 
 require __DIR__.'/auth.php';
