@@ -5,8 +5,8 @@ import.meta.glob([
   './hs/*'
 ]);
 
-import 'fontawesome-free/js/fontawesome.min.js';
-import 'fontawesome-free/js/all.js';
+import '/node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js';
+import '/node_modules/@fortawesome/fontawesome-free/js/all.js';
 
 
 import 'tom-select/dist/css/tom-select.bootstrap5.css'
