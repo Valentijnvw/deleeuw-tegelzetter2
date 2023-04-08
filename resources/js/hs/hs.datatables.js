@@ -8,7 +8,7 @@
 * Copyright 2020 Htmlstream
 */
 
-HSCore.components.HSDatatables = {
+window.HSCore.components.HSDatatables = {
 	collection: [],
 
 	dataAttributeName: 'data-hs-datatables-options',

@@ -5,7 +5,7 @@
 
 @push('scripts')
 
-<script>
+<script type="module">
     var settings = {
 		valueField: 'moneybird_id',
 		searchField: ['first_name','last_name', 'company_name', 'email', 'phone', 'city'],
@@ -64,7 +64,6 @@
 		}
 	};
 
-    setInterval(() => {console.log(window.TomSelect)}, 1000)
     new TomSelect(".moneybird-contact-selector", settings);
 </script>
 

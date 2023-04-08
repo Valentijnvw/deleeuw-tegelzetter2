@@ -8,7 +8,11 @@
 * Copyright 2021 Htmlstream
 */
 
-HSCore.components.HSFullCalendar = {
+// import 
+import { Calendar } from '@fullcalendar/core';
+// import timeGridPlugin from '/node_modules/@fullcalendar/timegrid';
+
+window.HSCore.components.HSFullCalendar = {
 	collection: [],
 
 	dataAttributeName: 'data-hs-fullcalendar-options',
@@ -87,7 +91,7 @@ HSCore.components.HSFullCalendar = {
 				continue;
 			}
 
-			that.collection[i].$initializedEl = new FullCalendar.Calendar(
+			that.collection[i].$initializedEl = new Calendar(
 				that.collection[i].$el,
 				that.collection[i].options
 			);

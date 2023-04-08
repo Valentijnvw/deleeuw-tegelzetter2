@@ -8,7 +8,7 @@
 * Copyright 2021 Htmlstream
 */
 
-HSCore.components.HSTomSelect = {
+window.HSCore.components.HSTomSelect = {
   dataAttributeName: 'data-hs-tom-select-options',
   defaults: {
     dropdownWrapperClass: 'tom-select-custom',

@@ -1,3 +1,11 @@
+{{-- @push("scripts")
+<script type="module">
+  import flatpickr from "/node_modules/flatpickr";
+  console.log(flatpickr)
+  alert("H")
+</script>
+@endpush --}}
+
 <x-app-layout title="Opdracht toevoegen" header="Opdracht toevoegen">
   <div class="row justify-content-center">
     <div class="col-lg-10">

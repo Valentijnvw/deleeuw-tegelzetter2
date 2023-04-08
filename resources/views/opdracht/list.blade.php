@@ -1,5 +1,10 @@
+@push("scripts")
+<script type="module">
+  HSCore.components.HSDatatables.init('.js-datatable')
+</script>
+@endpush
 <x-app-layout>
-
+  
   <a class="btn btn-secondary mb-3" href="{{ route('opdracht.create') }}" style="width: 200px;">
     <i class="fas fa-plus"></i> Opdracht toevoegen </a>
     <div class="card">
@@ -70,5 +75,6 @@
         Klik op "Opdracht verwijderen" om de opdracht definitief te verwijderen
     </x-slot>
 </x-confirmation-modal> --}}
+
 
 </x-app-layout>

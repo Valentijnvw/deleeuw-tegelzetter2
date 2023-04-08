@@ -1,7 +1,7 @@
 'use strict';
 
 // HS core
-const HSCore = {
+window.HSCore = {
   components: {},
   init: () => {
     // Botostrap Tootltips
@@ -18,4 +18,4 @@ const HSCore = {
   }
 }
 
-HSCore.init()
+window.HSCore.init()
