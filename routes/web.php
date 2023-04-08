@@ -40,7 +40,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
    
-    Route::get('/gebruikers', [UserController::class, 'list'])->name('gebruikers.lijst');
+    Route::get('/gebruikers', [UserController::class, 'lijst'])->name('gebruiker.lijst');
+    Route::get('/gebruikers/toevoegen', [UserController::class, 'toevoegen'])->name('gebruiker.toevoegen');
+    Route::post('/gebruikers/toevoegen', [UserController::class, 'create'])->name('gebruiker.create');
 });
 
 require __DIR__.'/auth.php';

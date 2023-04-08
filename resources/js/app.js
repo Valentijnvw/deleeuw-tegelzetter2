@@ -5,8 +5,8 @@ import.meta.glob([
   './pages/**'
 ]);
 
-// import '/node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js';
-// import '/node_modules/@fortawesome/fontawesome-free/js/all.js';
+import '/node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js';
+import '/node_modules/@fortawesome/fontawesome-free/js/all.js';
 
 import jQuery from 'jquery';
 window.$ = jQuery;

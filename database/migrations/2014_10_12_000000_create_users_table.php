@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('first_name');
             $table->text('last_name');
             $table->string('password');
-            $table->text('appearance');
             $table->rememberToken();
             $table->timestamps();
         });

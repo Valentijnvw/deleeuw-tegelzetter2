@@ -32,6 +32,9 @@
                 <a @class(['nav-link', 'active' => request()->routeIs('opdracht.list')]) class="nav-link" href="{{route('opdracht.list')}}">Opdrachten</a>
             </li>
             <li class="nav-item">
+              <a @class(['nav-link', 'active' => request()->routeIs('gebruiker.lijst')]) class="nav-link" href="{{route('gebruiker.lijst')}}">Gebruikers</a>
+          </li>
+            <li class="nav-item">
                 <a @class(['nav-link', 'active' => request()->routeIs('calendar')]) class="nav-link" href="{{route('calendar')}}">Agenda</a>
             </li>
             <li class="nav-item">

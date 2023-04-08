@@ -25,19 +25,25 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        Role::firstOrCreate(['name' => 'klant']);
-        Role::firstOrCreate(['name' => 'planner']);
+        $aannemerRole = Role::firstOrCreate(['name' => 'aannemer']);
+        $plannerRole = Role::firstOrCreate(['name' => 'planner']);
+        // Role::firstOrCreate(['name' => 'klant']);
 
         // Create test users
         $admin = User::factory()->create([
-            'email' => 'valentijnvanwinden@gmail.com',
+            'email' => 'admin@gmail.com',
         ]);
         $admin->assignRole($adminRole);
 
+        $aannemer = User::factory()->create([
+            'email' => 'aannemer@gmail.com'
+        ]);
+        $aannemer->assignRole($aannemerRole);
+
         $planner = User::factory()->create([
             'email' => 'planner@gmail.com',
-            'moneybird_id' => '376587614757586698',
         ]);
+        $planner->assignRole($plannerRole);
 
         Opdracht::factory()->count(10)->create([
             'klant_moneybird_id' => '376587614757586698',

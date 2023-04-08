@@ -26,7 +26,6 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
-            'appearance' => 'light',
         ];
     }
 }
