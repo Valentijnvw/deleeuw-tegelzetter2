@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Casdr\Moneybird\MoneybirdFacade as Moneybird;
+use App\Http\Controllers\Controller;
 
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactPeople;
