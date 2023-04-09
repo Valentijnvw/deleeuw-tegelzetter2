@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $planner->assignRole($plannerRole);
 
-        Opdracht::factory()->count(10)->create([
+        Opdracht::factory()->count(3)->create([
             'klant_moneybird_id' => '376587614757586698',
         ]);
 

@@ -53,7 +53,6 @@ class UserController extends Controller
         ]);
 
         $role = Role::findOrFail($request->role_id);
-        // dd($role);
         $user->assignRole($role);
         
         return Redirect::route('gebruiker.lijst');

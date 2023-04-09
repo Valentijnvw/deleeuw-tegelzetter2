@@ -16,6 +16,7 @@ class OpdrachtController extends Controller
     {
         $opdrachten = Opdracht::all()->map(function($opdracht) {
             $opdracht['contact'] = $opdracht->moneybirdContact;
+            $opdracht['aannemer'] = $opdracht->aannemerUser;
             return $opdracht;
         });
         return view('opdracht.list', [
@@ -25,7 +26,12 @@ class OpdrachtController extends Controller
 
     public function create(Request $request): View
     {
-        return view('opdracht.create');
+        $aannemers = User::all()->where(function($user) {
+            return $user->hasRole('aannemer');
+        });
+        return view('opdracht.create', [
+            "aannemerList" => $aannemers,
+        ]);
     }
 
     public function store(Request $request)
@@ -36,6 +42,7 @@ class OpdrachtController extends Controller
             'start_datum' => 'date|required',
             'eind_datum' => 'date|required',
             'omschrijving' => '',
+            'aannemer_user_id' => '',
         ]);
         
         $validated["start_datum"] = \Carbon\Carbon::parse($validated["start_datum"])->format("Y-m-d");

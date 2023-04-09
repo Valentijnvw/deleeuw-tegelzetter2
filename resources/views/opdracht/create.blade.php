@@ -1,7 +1,11 @@
 @push("scripts")
 <script type="module">
   flatpickr('.flatpickr', {
-    dateFormat: "d-m-Y"
+    dateFormat: "d-m-Y",
+  });
+
+  new TomSelect("#aannemer-select", {
+    placeholder: "Selecteer een aannemer..."
   });
 </script>
 @endpush
@@ -25,6 +29,16 @@
                   <label class="form-label">Selecteer een klant</label>
                   
                   <x-moneybird-contact-selector name="klant_moneybird_id" placeholder="Selecteer een klant..."/>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Selecteer een aannemer</label>
+                  <select class="js-select form-select" id="aannemer-select" name="aannemer_user_id" autocomplete="off">
+                    @foreach ($aannemerList as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name . " " . $user->last_name }}</option>
+                    @endforeach
+                  </select>
+
                 </div>
                 
               </div>

@@ -21,6 +21,7 @@
             <thead class="thead-light">
             <tr>
               <th>Naam klant</th>
+              <th>Aannemer</th>
               <th>Opdracht beschrijving</th>
               <th>Start datum</th>
               <th>Eind datum</th>
@@ -33,6 +34,9 @@
             <tr>
                 <td>
                     <span class="d-block h5 mb-0">{{ $opdracht->contact->displayName() }}</span>
+                </td>
+                <td>
+                    {{ $opdracht->aannemer?->first_name . " " . $opdracht->aannemer?->last_name }}
                 </td>
                 <td>
                     {{ \Illuminate\Support\Str::limit($opdracht->omschrijving, 100, $end='...') }}

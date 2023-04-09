@@ -52,17 +52,16 @@
                   <div class="dropdown-item-text">
                     <div class="d-flex align-items-center">
                       <div class="flex-grow-1">
-                        <h5 class="mb-0">ff</h5>
-                        <p class="card-text text-body">mark@site.com</p>
+                        <h5 class="mb-0">{{ auth()->user()->first_name . " " . auth()->user()->last_name }}</h5>
+                        <p class="card-text text-body">{{ auth()->user()->email }}</p>
                       </div>
                     </div>
                   </div>
   
                   <div class="dropdown-divider"></div>
   
-                  <a class="dropdown-item" href="#">Mijn account</a>
-  
-                  <div class="dropdown-divider"></div>
+                  {{-- <a class="dropdown-item" href="#">Mijn account</a> --}}
+                  {{-- <div class="dropdown-divider"></div> --}}
   
                   <form method="POST" action="{{ route('logout') }}">
                     @csrf

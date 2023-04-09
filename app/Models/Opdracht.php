@@ -14,14 +14,19 @@ class Opdracht extends Model
     protected $table = 'opdrachten';
 
     
-    public function user()
-    {   
-        return $this->belongsTo(User::class, 'klant_moneybird_id', 'moneybird_id');
-    }
+    // public function user()
+    // {   
+    //     return $this->belongsTo(User::class, 'klant_moneybird_id', 'moneybird_id');
+    // }
 
     public function moneybirdContact()
     {
         return $this->belongsTo(MoneybirdContact::class, 'klant_moneybird_id', 'id');
+    }
+
+    public function aannemerUser()
+    {
+        return $this->belongsTo(User::class, 'aannemer_user_id', 'id');
     }
 
     /**
