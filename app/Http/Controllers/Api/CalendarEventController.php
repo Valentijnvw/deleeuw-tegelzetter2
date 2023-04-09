@@ -20,8 +20,17 @@ class CalendarEventController extends Controller
 
         $opdrachten = Opdracht::where([
             ['start_datum', '>=', $start],
-            ['eind_datum', '<=', $end],
-        ])->get();
+            ['start_datum', '<=', $end],
+        ])
+            ->orWhere([
+                ['eind_datum', '>=', $start],
+                ['eind_datum', '<=', $end],
+            ])
+            ->orWhere([
+                ['start_datum', '<=', $start],
+                ['eind_datum', '>=', $end],
+            ])
+            ->get();
 
         $eventsJson = $opdrachten->map(function($opdracht) {
             return [
@@ -31,7 +40,6 @@ class CalendarEventController extends Controller
             ];
         });
 
-        // return ["test" => $start->format('d-m-Y')];
         return $eventsJson;
     }
     
