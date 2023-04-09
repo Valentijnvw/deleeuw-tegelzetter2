@@ -25,6 +25,8 @@ window.flatpickr = flatpickr;
 import { Calendar } from '@fullcalendar/core';
 window.Calendar = Calendar;
 import timeGridPlugin from '/node_modules/@fullcalendar/timegrid';
+import nlLocale from '/node_modules/@fullcalendar/core/locales/nl';
+window.nlLocale = nlLocale;
 window.timeGridPlugin = timeGridPlugin;
 
 import './hs.core.js'
