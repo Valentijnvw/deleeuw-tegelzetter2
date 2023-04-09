@@ -39,10 +39,10 @@ class OpdrachtController extends Controller
         $validated = $request->validate([
             'titel' => 'required',
             'klant_moneybird_id' => 'required',
-            'start_datum' => 'date|required',
-            'eind_datum' => 'date|required',
-            'omschrijving' => '',
-            'aannemer_user_id' => '',
+            'start_datum' => 'required|date',
+            'eind_datum' => 'required|date',
+            'omschrijving' => 'required',
+            'aannemer_user_id' => 'required',
         ]);
         
         $validated["start_datum"] = \Carbon\Carbon::parse($validated["start_datum"])->format("Y-m-d");

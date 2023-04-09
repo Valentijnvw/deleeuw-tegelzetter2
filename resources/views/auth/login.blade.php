@@ -16,33 +16,19 @@
         <!-- Form -->
         <div class="mb-4">
             <label class="form-label" for="signinSrEmail">E-mailadres</label>
-            <input type="email" class="form-control form-control-lg" name="email" id="signinSrEmail" tabindex="1" placeholder="E-mailadres" required>
-            <span class="invalid-feedback">Please enter a valid email address.</span>
+            <x-input-text type="email" class="form-control-lg" name="email" id="signinSrEmail" tabindex="1" placeholder="E-mailadres" value="{{ old('email') }}" />
         </div>
         <!-- End Form -->
 
         <!-- Form -->
         <div class="mb-4">
             <label class="form-label w-100" for="signupSrPassword" tabindex="0">
-            <span class="d-flex justify-content-between align-items-center">
-                <span>Wachtwoord</span>
-                <a class="form-label-link mb-0" href="{{ route('password.request') }}">Wachtwoord vergeten?</a>
-            </span>
+                <span class="d-flex justify-content-between align-items-center">
+                    <span>Wachtwoord</span>
+                    <a class="form-label-link mb-0" href="{{ route('password.request') }}">Wachtwoord vergeten?</a>
+                </span>
             </label>
-
-            <div class="input-group input-group-merge" data-hs-validation-validate-class>
-            <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupSrPassword" placeholder="Wachtwoord" required minlength="8" data-hs-toggle-password-options='{
-                    "target": "#changePassTarget",
-                    "defaultClass": "bi-eye-slash",
-                    "showClass": "bi-eye",
-                    "classChangeTarget": "#changePassIcon"
-                    }'>
-            <a id="changePassTarget" class="input-group-append input-group-text" href="javascript:;">
-                <i id="changePassIcon" class="bi-eye"></i>
-            </a>
-            </div>
-
-            <span class="invalid-feedback">Please enter a valid password.</span>
+            <x-input-text type="password" class="form-control-lg" name="password" id="signupSrPassword" placeholder="Wachtwoord" required minlength="8" />            
         </div>
         <!-- End Form -->
 

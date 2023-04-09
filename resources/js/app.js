@@ -25,9 +25,11 @@ window.flatpickr = flatpickr;
 import { Calendar } from '@fullcalendar/core';
 window.Calendar = Calendar;
 import timeGridPlugin from '/node_modules/@fullcalendar/timegrid';
+window.timeGridPlugin = timeGridPlugin;
+import dayGridPlugin from '/node_modules/@fullcalendar/daygrid';
+window.dayGridPlugin = dayGridPlugin;
 import nlLocale from '/node_modules/@fullcalendar/core/locales/nl';
 window.nlLocale = nlLocale;
-window.timeGridPlugin = timeGridPlugin;
 
 import './hs.core.js'
 import './hs/hs.datatables.js'

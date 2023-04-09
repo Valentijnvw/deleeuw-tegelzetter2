@@ -23,8 +23,8 @@
 
               <div class="col-sm-9">
                 <div class="input-group input-group-sm-vertical">
-                  <input type="text" class="form-control" name="first_name" id="firstNameLabel" placeholder="Voornaam">
-                  <input type="text" class="form-control" name="last_name" id="lastNameLabel" placeholder="Achternaam">
+                  <x-input-text type="text" name="first_name" id="firstNameLabel" placeholder="Voornaam" />
+                  <x-input-text type="text" name="last_name" id="lastNameLabel" placeholder="Achternaam" />
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
               <label for="emailLabel" class="col-sm-3 col-form-label form-label">E-mailadres</label>
 
               <div class="col-sm-9">
-                <input type="email" class="form-control" name="email" placeholder="E-mailadres">
+                <x-input-text type="email" class="form-control" name="email" placeholder="E-mailadres" />
               </div>
             </div>
             <!-- End Form -->
@@ -45,7 +45,7 @@
               <label for="wachtwoord" class="col-sm-3 col-form-label form-label">Wachtwoord</label>
 
               <div class="col-sm-9">
-                <input type="password" class="form-control" name="password" id="wachtwoord" placeholder="Wachtwoord">
+                <x-input-text type="password" class="form-control" name="password" id="wachtwoord" placeholder="Wachtwoord" />
               </div>
             </div>
             <!-- End Form -->
@@ -54,7 +54,7 @@
                 <label for="herhaal-wachtwoord" class="col-sm-3 col-form-label form-label">Herhaal wachtwoord</label>
   
                 <div class="col-sm-9">
-                  <input type="password" class="form-control" name="password_confirm" id="herhaal-wachtwoord" placeholder="Herhaal wachtwoord">
+                  <x-input-text type="password" class="form-control" name="password_confirm" id="herhaal-wachtwoord" placeholder="Herhaal wachtwoord" />
                 </div>
               </div>
 

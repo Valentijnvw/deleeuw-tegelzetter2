@@ -1,6 +1,7 @@
 @props([
     'name',
     'placeholder',
+	'invalid',
 ])
 
 @push('scripts')
@@ -69,4 +70,5 @@
 
 @endPush
 
-<select class="js-select form-select moneybird-contact-selector" name="{{$name}}" autocomplete="off"></select>
+<select @class(["js-select", "form-select", "moneybird-contact-selector", "is-invalid" => $errors->any($name)]) name="{{$name}}" autocomplete="off"></select>
+<x-input-error-messages :messages="$errors->get('klant_moneybird_id')" />

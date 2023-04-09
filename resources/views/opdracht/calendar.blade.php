@@ -2,13 +2,13 @@
     <script type="module">
 		var calendarEl = document.getElementById("js-fullcalendar-with-search");
 		const calendar = new Calendar(calendarEl, {
-			plugins: [timeGridPlugin],
+			plugins: [dayGridPlugin, timeGridPlugin],
 			locale: nlLocale,
-			initialView: 'timeGridWeek',
+			initialView: 'dayGridMonth',
 			headerToolbar: {
-				left: 'prev,next',
+				left: 'prev,next,today',
 				center: 'title',
-				right: 'timeGridWeek,timeGridDay' // user can switch between the two
+				right: 'dayGridMonth, timeGridWeek,timeGridDay' // user can switch between the two
 			},
 			events: '{{ route('api.calendar.opdrachten') }}'
 		});

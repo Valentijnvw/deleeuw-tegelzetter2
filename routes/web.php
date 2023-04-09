@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Redirect;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+App::setLocale('nl');
 
 Route::get('/', function () {
     // return view('welcome');
