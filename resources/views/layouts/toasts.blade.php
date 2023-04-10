@@ -1,5 +1,3 @@
-<button id="liveToastBtn" class="btn btn-primary">Toast</button>
-
 @if(session()->has('successMessage'))
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 10000">
     <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
