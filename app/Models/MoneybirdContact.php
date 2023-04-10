@@ -12,13 +12,6 @@ class MoneybirdContact extends Model
         return $this->hasMany(Opdracht::class, 'klant_moneybird_id', 'id');
     }
 
-    // private function storeData()
-    // {
-    //     $contact = Moneybird::contact()->find($this->id);
-    //     $this->fill($contact->attributes());
-    //     $this->save();
-    // }
-
     // bedrijfsnaam of volledige naam
     public function displayName()
     {

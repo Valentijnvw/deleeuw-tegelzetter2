@@ -56,8 +56,7 @@
                 <div class="col-sm-9">
                   <x-input-text type="password" class="form-control" name="password_confirm" id="herhaal-wachtwoord" placeholder="Herhaal wachtwoord" />
                 </div>
-              </div>
-
+            </div>
 
             <!-- Form -->
             <div id="accountType" class="row mb-4">

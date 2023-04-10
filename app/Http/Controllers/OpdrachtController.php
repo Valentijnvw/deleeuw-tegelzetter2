@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Http\RedirectResponse;
+
 use App\Models\Opdracht;
 use App\Models\User;
 use App\Services\MoneybirdContactService;
@@ -69,8 +71,9 @@ class OpdrachtController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    public function verwijderen(Request $request)
     {
-        return Redirect::to('/');
+        Opdracht::destroy($request->opdracht_verwijder_id);
+        return back()->with('successMessage', 'De opdracht is verwijderd uit het systeem');
     }
 }

@@ -1,4 +1,5 @@
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import { Toast } from '/node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
+window.Toast = Toast;
 
 import.meta.glob([
   '../img/**',

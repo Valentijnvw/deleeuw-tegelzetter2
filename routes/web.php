@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
     Route::get('/opdracht/aanmaken', [OpdrachtController::class, 'create'])->name('opdracht.create');
     Route::post('/opdracht/store', [OpdrachtController::class, 'store'])->name('opdracht.store');
-    Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'delete'])->name('opdracht.delete');
+    Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'verwijderen'])->name('opdracht.verwijderen');
     
 
     Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
