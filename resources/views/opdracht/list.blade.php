@@ -43,7 +43,7 @@
                     {{ $opdracht->aannemer?->first_name . " " . $opdracht->aannemer?->last_name }}
                 </td>
                 <td>
-                    {{ \Illuminate\Support\Str::limit($opdracht->omschrijving, 100, $end='...') }}
+                    {{ \Illuminate\Support\Str::limit($opdracht->omschrijving, 60, $end='...') }}
                 </td>
                 <td>
                     {{ \Carbon\Carbon::parse($opdracht->start_datum)->format('d-m-Y') }}
