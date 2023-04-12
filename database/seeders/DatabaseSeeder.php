@@ -24,9 +24,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $aannemerRole = Role::firstOrCreate(['name' => 'aannemer']);
-        $plannerRole = Role::firstOrCreate(['name' => 'planner']);
+        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
+        $aannemerRole = Role::firstOrCreate(['name' => 'Aannemer']);
+        $plannerRole = Role::firstOrCreate(['name' => 'Planner']);
+        $klantRole = Role::firstOrCreate(['name' => 'Klant']);
         // Role::firstOrCreate(['name' => 'klant']);
 
         // Create test users
@@ -45,12 +46,34 @@ class DatabaseSeeder extends Seeder
         ]);
         $planner->assignRole($plannerRole);
 
+        $klant = User::factory()->create([
+            'email' => 'valentijnvanwinden@gmail.com',
+        ]);
+        $klant->assignRole($klantRole);
+
         Opdracht::factory()->count(3)->create([
             'klant_moneybird_id' => '376587614757586698',
         ]);
 
+        function assignNewPermissions(Role $role, Array $names) {
+            foreach($names as $name) {
+                $permission = Permission::firstOrCreate([
+                    'name' => $name
+                ]);
+                $role->givePermissionTo($permission);
+            }
+        }
+        // assignNewPermissions($planner, [
+        //     "opdrachten.*",
+        //     ""
+        // ]);
+
+        // Permission::insert($permissions->toArray());
+
         // Store the contact in moneybird_contacts
         $contact = new MoneybirdContactService(376587614757586698);
         $contact->insertOrUpdateContact();
+
+        
     }
 }

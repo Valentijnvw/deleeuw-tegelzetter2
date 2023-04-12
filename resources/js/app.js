@@ -34,3 +34,7 @@ window.nlLocale = nlLocale;
 
 import './hs.core.js'
 import './hs/hs.datatables.js'
+
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+Alpine.start();

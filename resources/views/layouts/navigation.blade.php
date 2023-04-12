@@ -24,13 +24,14 @@
         <nav class="navbar-nav-wrap-col collapse navbar-collapse" id="navbarNavMenu">
           <!-- Navbar -->
           <ul class="navbar-nav bg-primary">
-  
             <li class="nav-item">
-                <a @class(['nav-link', 'active' => request()->routeIs('dashboard')]) href="{{route('dashboard')}}" >Dashboard</a>
+              <a @class(['nav-link', 'active' => request()->routeIs('dashboard')]) href="{{route('dashboard')}}" >Dashboard</a>
             </li>
+            @can('opdrachten.*')
             <li class="nav-item">
                 <a @class(['nav-link', 'active' => request()->routeIs('opdracht.list')]) class="nav-link" href="{{route('opdracht.list')}}">Opdrachten</a>
             </li>
+            @endcan
             <li class="nav-item">
               <a @class(['nav-link', 'active' => request()->routeIs('gebruiker.lijst')]) class="nav-link" href="{{route('gebruiker.lijst')}}">Gebruikers</a>
           </li>
