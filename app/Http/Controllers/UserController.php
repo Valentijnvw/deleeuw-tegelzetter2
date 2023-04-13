@@ -45,12 +45,11 @@ class UserController extends Controller
             'role_id' => 'required',
             'klant_moneybird_id'
         ]);
-
-        $user = User::where('email', '=', $request->email);
-        if($user !== null) {
+        
+        $user = User::where('email', $request->email)->get();
+        if($user->count() > 0) {
             return Redirect::route('gebruiker.lijst')->with('errorMessage', 'Gebruiker bestaat al!');
         }
-
         
         $user = User::create([
             'email' => $request->email,
