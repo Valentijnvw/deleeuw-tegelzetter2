@@ -85,4 +85,17 @@ class UserController extends Controller
         ]);
         $user->save();
     }
+
+    // Delete
+
+    public function destroy(Request $request)
+    {
+        $validated = $request->validate([
+            'gebruiker_verwijder_id' => 'required',
+        ]);
+
+        User::destroy($request->gebruiker_verwijder_id);
+
+        return back()->with('successMessage', 'Gebruiker verwijderd uit het systeem');
+    }
 }

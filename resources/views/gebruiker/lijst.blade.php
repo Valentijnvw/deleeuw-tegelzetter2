@@ -24,6 +24,7 @@
               <th>Naam</th>
               <th>Functie</th>
               <th>Actief sinds</th>
+              <th></th>
             </tr>
             </thead>
       
@@ -43,6 +44,20 @@
                     {{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y') }}
                 </td>
 
+                <td><div class="dropdown">
+                  <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="contentActivityStreamDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis-vertical text-primary" style="width: 5px;"></i>
+                  </button>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonWithIcon">
+                    <a class="dropdown-item" href="{{ route('opdracht.bewerken', [$user->id]) }}">
+                      <i class="fas fa-pencil dropdown-item-icon"></i> Bewerken
+                    </a>
+                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="$('#opdracht-verwijderen-id').val('{{ $user->id }}')">
+                      <i class="fas fa-trash dropdown-item-icon"></i> Verwijderen
+                    </a>
+                  </div>
+                </div></td>
             </tr>
             @endforeach
 
@@ -62,14 +77,29 @@
         <!-- End Footer -->
       </div>
 
-{{-- <x-confirmation-modal routeName="opdracht.delete" ::componentId="opdrachtId">
-    <x-slot name="title">
-        Weet je het zeker?
-    </x-slot>
-    <x-slot name="message">
-        Klik op "Opdracht verwijderen" om de opdracht definitief te verwijderen
-    </x-slot>
-</x-confirmation-modal> --}}
-
+<!-- Modal -->
+<div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form action="{{route('gebruiker.destroy')}}" method="POST">
+        @csrf
+        @method('delete')
+        <div class="modal-header">
+          <h5 class="modal-title">Weet je het zeker?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="opdracht-verwijderen-id" name="gebruiker_verwijder_id" />
+          <p>Klik op "Gebruiker verwijderen" om de opdracht definitief te verwijderen. Let op: deze actie kan <strong>niet</strong> ongedaan worden gemaakt!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-white" data-bs-dismiss="modal">Annuleren</button>
+          <button type="submit" class="btn btn-primary">Gebruiker verwijderen</button>
+        </div>
+      </div>
+      </form>
+  </div>
+</div>
+<!-- End Modal -->
 
 </x-app-layout>

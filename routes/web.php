@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/gebruikers', [UserController::class, 'lijst'])->name('gebruiker.lijst');
     Route::get('/gebruikers/toevoegen', [UserController::class, 'toevoegen'])->name('gebruiker.toevoegen');
     Route::post('/gebruikers/toevoegen', [UserController::class, 'create'])->name('gebruiker.create');
+    Route::delete('/gebruikers/verwijderen', [UserController::class, 'destroy'])->name('gebruiker.destroy');
 
 
     Route::get('/klantenpaneel/mijn-gegevens', [KlantenPaneelController::class, 'gegevens'])->name('klantenpaneel.gegevens');
