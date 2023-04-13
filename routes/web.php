@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Support\Facades\App;
+
+use App\Models\Opdracht;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,10 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Opdrachten
     Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
     Route::get('/opdracht/aanmaken', [OpdrachtController::class, 'create'])->name('opdracht.create');
     Route::post('/opdracht/store', [OpdrachtController::class, 'store'])->name('opdracht.store');
-    Route::post('/opdracht/verwijderen', [OpdrachtController::class, 'verwijderen'])->name('opdracht.verwijderen');
+    Route::delete('/opdracht/verwijderen', [OpdrachtController::class, 'verwijderen'])->name('opdracht.verwijderen');
+    Route::get('/opdracht/{opdracht}/bewerken/', [OpdrachtController::class, 'bewerken'])->name('opdracht.bewerken');
     
 
     Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
@@ -50,6 +54,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/klantenpaneel/mijn-gegevens', [KlantenPaneelController::class, 'gegevens'])->name('klantenpaneel.gegevens');
+
 });
 
 require __DIR__.'/auth.php';

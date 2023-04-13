@@ -43,13 +43,13 @@
                     {{ $opdracht->aannemer?->first_name . " " . $opdracht->aannemer?->last_name }}
                 </td>
                 <td>
-                    {{ \Illuminate\Support\Str::limit($opdracht->omschrijving, 60, $end='...') }}
+                    {{ Str::limit($opdracht->omschrijving, 60, $end='...') }}
                 </td>
                 <td>
-                    {{ \Carbon\Carbon::parse($opdracht->start_datum)->format('d-m-Y') }}
+                    {{ Carbon::parse($opdracht->start_datum)->format('d-m-Y') }}
                 </td>
                 <td>
-                    {{ \Carbon\Carbon::parse($opdracht->eind_datum)->format('d-m-Y') }}
+                    {{ Carbon::parse($opdracht->eind_datum)->format('d-m-Y') }}
                 </td>
                 <td><div class="dropdown">
                   <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="contentActivityStreamDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,7 +57,7 @@
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonWithIcon">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('opdracht.bewerken', [$opdracht->id]) }}">
                       <i class="fas fa-pencil dropdown-item-icon"></i> Bewerken
                     </a>
                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="$('#opdracht-verwijderen-id').val('{{ $opdracht->id }}')">
@@ -90,6 +90,7 @@
     <div class="modal-content">
       <form action="{{route('opdracht.verwijderen')}}" method="POST">
         @csrf
+        @method('delete')
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Weet je het zeker?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

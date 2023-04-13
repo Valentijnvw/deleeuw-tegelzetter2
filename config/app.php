@@ -212,6 +212,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Moneybird' => Casdr\Moneybird\MoneybirdFacade::class,
+        'Carbon' => \Carbon\Carbon::class,
+        'Str' => \Illuminate\Support\Str::class,
     ])->toArray(),
 
 ];

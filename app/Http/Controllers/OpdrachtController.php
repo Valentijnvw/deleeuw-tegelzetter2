@@ -79,10 +79,28 @@ class OpdrachtController extends Controller
         $opdracht->save();
 
         foreach ($files as $file) {
-            $path = $file->store('opdrachten/' . $opdracht->id . '/fotos');
+            $path = $file->store('opdrachten/' . $opdracht->id . '/fotos', 'public');
         }
 
         return Redirect::route('opdracht.list');
+    }
+
+    public function bewerken(Request $request)
+    {
+        $opdracht = Opdracht::find($request->opdracht);
+
+        $imageUrls = Storage::files('public/opdrachten/' . $opdracht->id . '/fotos');
+        $imageUrls = collect($imageUrls)->map(function($image) {
+            return Storage::url($image);
+        });
+
+        return view('opdracht.bewerken', [
+            'opdracht' => $opdracht,
+            'aannemerList' => User::all()->where(function($user) {
+                return $user->hasRole('Aannemer');
+            }),
+            'imageUrlList' => $imageUrls,
+        ]);
     }
 
     public function calendar(Request $request): View
