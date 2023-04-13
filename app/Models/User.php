@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Opdracht;
+// use App\Models\Opdracht;
 
 class User extends Authenticatable // implements MustVerifyEmail
 {
@@ -17,6 +17,11 @@ class User extends Authenticatable // implements MustVerifyEmail
     public function opdrachten()
     {
         return $this->hasMany(Opdracht::class, 'klant_moneybird_id', 'moneybird_id');
+    }
+
+    public function moneybirdContact()
+    {
+        return $this->belongsTo(MoneybirdContact::class, 'email', 'email');
     }
 
     /**

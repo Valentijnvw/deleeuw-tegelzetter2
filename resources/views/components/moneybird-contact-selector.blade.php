@@ -7,6 +7,7 @@
 @push('scripts')
 
 <script type="module">
+	let users = [];
     var settings = {
 		valueField: 'moneybird_id',
 		searchField: ['first_name','last_name', 'company_name', 'email', 'phone', 'city'],
@@ -17,10 +18,16 @@
 			fetch(url)
 				.then(response => response.json())
 				.then(json => {
+					users = json.items;
 					callback(json);
 				}).catch(()=>{
 					callback();
 				});
+		},
+		onChange: function(value) {
+			// window callback uitvoeren
+			let user = users.find(user => user.moneybird_id == value)
+			window.mbUserSelected(user)
 		},
 		render: {
 			option: function(item, escape) {
@@ -71,4 +78,4 @@
 @endPush
 
 <select @class(["js-select", "form-select", "moneybird-contact-selector", "is-invalid" => $errors->any($name)]) name="{{$name}}" autocomplete="off"></select>
-<x-input-error-messages :messages="$errors->get('klant_moneybird_id')" />
+<x-input-error-messages :messages="$errors->get($name)" />

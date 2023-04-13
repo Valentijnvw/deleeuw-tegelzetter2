@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OpdrachtController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KlantenPaneelController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Redirect;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/gebruikers', [UserController::class, 'lijst'])->name('gebruiker.lijst');
     Route::get('/gebruikers/toevoegen', [UserController::class, 'toevoegen'])->name('gebruiker.toevoegen');
     Route::post('/gebruikers/toevoegen', [UserController::class, 'create'])->name('gebruiker.create');
+
+
+    Route::get('/klantenpaneel/mijn-gegevens', [KlantenPaneelController::class, 'gegevens'])->name('klantenpaneel.gegevens');
 });
 
 require __DIR__.'/auth.php';

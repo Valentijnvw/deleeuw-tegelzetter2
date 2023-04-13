@@ -27,17 +27,20 @@
             <li class="nav-item">
               <a @class(['nav-link', 'active' => request()->routeIs('dashboard')]) href="{{route('dashboard')}}" >Dashboard</a>
             </li>
-            @can('opdrachten.*')
+            {{-- @can('opdrachten.*') --}}
             <li class="nav-item">
                 <a @class(['nav-link', 'active' => request()->routeIs('opdracht.list')]) class="nav-link" href="{{route('opdracht.list')}}">Opdrachten</a>
             </li>
-            @endcan
+            {{-- @endcan --}}
             <li class="nav-item">
               <a @class(['nav-link', 'active' => request()->routeIs('gebruiker.lijst')]) class="nav-link" href="{{route('gebruiker.lijst')}}">Gebruikers</a>
-          </li>
+            </li>
             <li class="nav-item">
                 <a @class(['nav-link', 'active' => request()->routeIs('calendar')]) class="nav-link" href="{{route('calendar')}}">Agenda</a>
             </li>
+            <li class="nav-item">
+              <a @class(['nav-link', 'active' => request()->routeIs('klantenpaneel.gegevens')]) class="nav-link" href="{{route('klantenpaneel.gegevens')}}">Mijn gegevens</a>
+          </li>
             <li class="nav-item">
                 <!-- Account -->
                 <div class="dropdown">

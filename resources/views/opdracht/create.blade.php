@@ -10,10 +10,6 @@
 </script>
 @endpush
 
-@php
-    // dd();
-@endphp
-
 <x-app-layout title="Opdracht toevoegen" header="Opdracht toevoegen">
   <div class="row justify-content-center">
     <div class="col-lg-10">

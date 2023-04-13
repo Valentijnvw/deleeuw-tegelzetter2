@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
+use App\Services\MoneybirdContactService;
 
 class UserController extends Controller
 {
@@ -35,7 +36,6 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -43,15 +43,25 @@ class UserController extends Controller
             'password' => 'required',
             'password_confirm' => 'same:password',
             'role_id' => 'required',
+            'klant_moneybird_id'
         ]);
 
+        $user = User::where('email', '=', $request->email);
+        if($user !== null) {
+            return Redirect::route('gebruiker.lijst')->with('errorMessage', 'Gebruiker bestaat al!');
+        }
+
+        
         $user = User::create([
             'email' => $request->email,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'password' => Hash::make($request->password),
         ]);
-
+        
+        $moneybirdContactService = new MoneybirdContactService($request->klant_moneybird_id);
+        $moneybirdContactService->insertOrUpdateContact();
+        
         $role = Role::findOrFail($request->role_id);
         $user->assignRole($role);
         
