@@ -24,6 +24,11 @@ class User extends Authenticatable // implements MustVerifyEmail
         return $this->belongsTo(MoneybirdContact::class, 'email', 'email');
     }
 
+    public function displayName()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -13,8 +13,10 @@
 <x-app-layout title="Opdracht bewerken" header="Opdracht bewerken">
     <!-- End Page Header -->
     <div class="card p-4">
-        <form method="POST" action="{{ route('opdracht.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('opdracht.update') }}" enctype="multipart/form-data">
             @csrf
+            @method('patch')
+            <input type="hidden" name="opdrachtId" value="{{ $opdracht->id }}" >
             <div class="card-body row">
                 <p class="mb-3">
                     Klant: {{ $opdracht->moneybirdContact->displayName() }}
@@ -50,8 +52,6 @@
                                     <x-input-text type="text" name="eind_datum" class="form-control flatpickr" placeholder="Eind datum" value="{{ Carbon::parse($opdracht->eind_datum)->format('d-m-Y') }}" />
                                 </div>
                             </div>
-                
-                
                             
                         </div>
                         <div class="mb-3">

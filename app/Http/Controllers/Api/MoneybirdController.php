@@ -22,17 +22,6 @@ class MoneybirdController extends Controller
         });
     }
 
-    // public static function updateOrStoreContact(Int $moneybirdId)
-    // {
-    //     $contact = Moneybird::contact()->find($moneybirdId);
-    //     $moneybirdContact = MoneybirdContact::firstOrCreate([
-    //         "id" => $moneybirdId
-    //     ]);
-    //     $moneybirdContact->fill($contact->attributes());
-    //     $moneybirdContact->save();
-    //     return $moneybirdContact;
-    // }
-
     public function userSearch(Request $request) {
         $query = $request->query('q');
         $contacts = Moneybird::contact()->search($query);

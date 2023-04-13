@@ -10,7 +10,11 @@
 				center: 'title',
 				right: 'dayGridMonth, timeGridWeek,timeGridDay' // user can switch between the two
 			},
-			events: '{{ route('api.calendar.opdrachten') }}'
+			events: '{{ route('api.calendar.opdrachten') }}',
+			eventClick: function(info) {
+				let url = "{{ route('opdracht.bewerken', ':OPDR_ID:') }}";
+				window.location.href = url.replace(":OPDR_ID:", info.event.extendedProps.opdrachtId);
+			}
 		});
 
 		calendar.render();

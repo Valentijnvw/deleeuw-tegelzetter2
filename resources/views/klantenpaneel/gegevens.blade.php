@@ -12,6 +12,7 @@
   
     <div class="card container">
         <div class="card-body">
+            @if(Auth::user()->moneybirdContact)
             <ul>
                 <li>Voornaam: {{ Auth::user()->moneybirdContact->firstname }}</li>
                 <li>Achternaam: {{ Auth::user()->moneybirdContact->lastname }}</li>
@@ -22,6 +23,9 @@
                 <li>KvK nummer: </li>
                 <li>BTW nummer: </li>
             </ul>
+            @else
+                <p>Er is geen Moneybird account gekoppeld aan dit account</p>
+            @endif
             
         </div>
     </div>

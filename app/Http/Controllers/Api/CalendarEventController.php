@@ -10,14 +10,12 @@ use App\Models\Opdracht;
 
 use \Carbon\Carbon;
 
-
 class CalendarEventController extends Controller
 {
     public static function getOpdrachten(Request $request)
     {
         $start = Carbon::parse($request->query('start'));
         $end = Carbon::parse($request->query('end'));
-
         $opdrachten = Opdracht::where([
             ['start_datum', '>=', $start],
             ['start_datum', '<=', $end],
@@ -33,10 +31,15 @@ class CalendarEventController extends Controller
             ->get();
 
         $eventsJson = $opdrachten->map(function($opdracht) {
+            $titlePrefix = $opdracht->aannemerUser ? $opdracht->aannemerUser->displayname() . ': ' : '';
             return [
-                "title" => $opdracht->titel,
+                "title" => $titlePrefix . $opdracht->titel,
                 "start" => $opdracht->start_datum,
                 "end" => $opdracht->eind_datum,
+                "extendedProps" => [
+                    "opdrachtId" => $opdracht->id,
+                    "aannemerNaam" => $opdracht->aannemerUser?->displayName(),
+                ],
             ];
         });
 

@@ -103,15 +103,30 @@ class OpdrachtController extends Controller
         ]);
     }
 
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'opdrachtId' => 'required',
+            'titel' => 'required',
+            'start_datum' => 'required|date',
+            'eind_datum' => 'required|date',
+            'omschrijving' => 'required',
+            'aannemer_user_id' => 'required',
+        ]);
+        
+        $validated["start_datum"] = \Carbon\Carbon::parse($validated["start_datum"])->format("Y-m-d");
+        $validated["eind_datum"] = \Carbon\Carbon::parse($validated["eind_datum"])->format("Y-m-d");
+
+        $opdracht = Opdracht::find($request->opdrachtId);
+        $opdracht->fill($validated);
+        $opdracht->save();
+
+        return back()->with('successMessage', 'Wijzigingen opgeslagen');
+    }
+
     public function calendar(Request $request): View
     {
-        $opdrachten = Opdracht::all()->map(function($opdracht) {
-            $opdracht['contact'] = $opdracht->moneybirdContact;
-            return $opdracht;
-        });
-        return view('opdracht.calendar', [
-            'opdrachten' => $opdrachten
-        ]);
+        return view('opdracht.calendar');
     }
 
     public function verwijderen(Request $request)

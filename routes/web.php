@@ -34,9 +34,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Profiel
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Opdrachten
     Route::get('/opdrachten', [OpdrachtController::class, 'list'])->name('opdracht.list');
@@ -44,10 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/opdracht/store', [OpdrachtController::class, 'store'])->name('opdracht.store');
     Route::delete('/opdracht/verwijderen', [OpdrachtController::class, 'verwijderen'])->name('opdracht.verwijderen');
     Route::get('/opdracht/{opdracht}/bewerken/', [OpdrachtController::class, 'bewerken'])->name('opdracht.bewerken');
-    
+    Route::patch('/opdracht/update', [OpdrachtController::class, 'update'])->name('opdracht.update');
 
+    // Agenda
     Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
    
+    // Gebruikers
     Route::get('/gebruikers', [UserController::class, 'lijst'])->name('gebruiker.lijst');
     Route::get('/gebruikers/toevoegen', [UserController::class, 'toevoegen'])->name('gebruiker.toevoegen');
     Route::post('/gebruikers/toevoegen', [UserController::class, 'create'])->name('gebruiker.create');
