@@ -15,7 +15,7 @@
     <div class="col-lg-10">
       <!-- End Page Header -->
       <div class="card p-4">
-        <form method="POST" action="{{ route('opdracht.store') }}">
+        <form method="POST" action="{{ route('opdracht.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="row">
@@ -52,7 +52,14 @@
                   <x-input-text type="text" name="eind_datum" class="form-control flatpickr" placeholder="Eind datum" />
                 </div>
 
+                <div class="mb-3">
+                  <label class="form-label">Foto's uploaden</label>
+                  <input type="file" name="fotos[]" id="customFileEg1" class="form-control" multiple="multiple">
+                </div>
               </div>
+
+
+              
             </div>
             <div class="mb-3">
               <label class="form-label" for="exampleFormControlInput1">Omschrijving</label>
