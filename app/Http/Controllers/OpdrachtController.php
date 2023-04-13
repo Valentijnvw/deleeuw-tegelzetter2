@@ -15,6 +15,7 @@ use App\Services\MoneybirdContactService;
 
 class OpdrachtController extends Controller
 {
+
     public function list(Request $request): View
     {
         $opdrachten = Opdracht::all()->map(function($opdracht) {
@@ -79,10 +80,15 @@ class OpdrachtController extends Controller
         $opdracht->save();
 
         foreach ($files as $file) {
-            $path = $file->store('opdrachten/' . $opdracht->id . '/fotos', 'public');
+            $path = $file->store('opdrachten/' . $opdracht->id . '/fotos');
         }
 
         return Redirect::route('opdracht.list');
+    }
+
+    public function image(Request $request)
+    {
+        return response()->file(storage_path("app/afb2.jpg"));
     }
 
     public function bewerken(Request $request)

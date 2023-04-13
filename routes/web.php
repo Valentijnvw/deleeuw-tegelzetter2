@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/opdracht/verwijderen', [OpdrachtController::class, 'verwijderen'])->name('opdracht.verwijderen');
     Route::get('/opdracht/{opdracht}/bewerken/', [OpdrachtController::class, 'bewerken'])->name('opdracht.bewerken');
     Route::patch('/opdracht/update', [OpdrachtController::class, 'update'])->name('opdracht.update');
+    Route::get('/opdracht/{opdracht}/image/{num}', [OpdrachtController::class, 'image'])->name('opdracht.image');
+
+    Route::get('/test', [OpdrachtController::class, 'image'])->name('opdracht.image');
 
     // Agenda
     Route::get('/agenda', [OpdrachtController::class, 'calendar'])->name('calendar');
