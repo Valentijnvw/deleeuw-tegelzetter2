@@ -1,91 +1,129 @@
-@push("scripts")
-<script type="module">
-  HSCore.components.HSDatatables.init('.js-datatable')
-</script>
-@endpush
-@php
-    // dd(session()->get('successMessage'));
-@endphp
 <x-app-layout title="Opdrachten" header="Opdrachten">
   
+<div x-data="{tab: 'nieuw'}">
   <a class="btn btn-secondary mb-3" href="{{ route('opdracht.create') }}" style="width: 200px;">
-    <i class="fas fa-plus"></i> Opdracht toevoegen </a>
+    <i class="fas fa-plus"></i> Opdracht toevoegen</a>
     <div class="card">
-      
-        <!-- Table -->
-        <div class="table-responsive datatable-custom">
-          <table class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                 data-hs-datatables-options='{
-                         "order": [],
-                         "isResponsive": false,
-                         "isShowPaging": false,
-                         "pagination": "datatableWithPaginationPagination"
-                       }'>
-            <thead class="thead-light">
-            <tr>
-              <th>Naam klant</th>
-              <th>Aannemer</th>
-              <th>Opdracht beschrijving</th>
-              <th>Start datum</th>
-              <th>Eind datum</th>
-              <th></th>
-            </tr>
-            </thead>
-      
-            <tbody>
-
-            @foreach ($opdrachten as $opdracht)
-            <tr>
-                <td>
-                    <span class="d-block h5 mb-0">{{ $opdracht->contact->displayName() }}</span>
-                </td>
-                <td>
-                    {{ $opdracht->aannemer?->first_name . " " . $opdracht->aannemer?->last_name }}
-                </td>
-                <td>
-                    {{ Str::limit($opdracht->omschrijving, 60, $end='...') }}
-                </td>
-                <td>
-                    {{ Carbon::parse($opdracht->start_datum)->format('d-m-Y') }}
-                </td>
-                <td>
-                    {{ Carbon::parse($opdracht->eind_datum)->format('d-m-Y') }}
-                </td>
-                <td><div class="dropdown">
-                  <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="contentActivityStreamDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-ellipsis-vertical text-primary" style="width: 5px;"></i>
-                  </button>
-
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonWithIcon">
-                    <a class="dropdown-item" href="{{ route('opdracht.bewerken', [$opdracht->id]) }}">
-                      <i class="fas fa-pencil dropdown-item-icon"></i> Bewerken
-                    </a>
-                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="$('#opdracht-verwijderen-id').val('{{ $opdracht->id }}')">
-                      <i class="fas fa-trash dropdown-item-icon"></i> Verwijderen
-                    </a>
+      <div class="card-header">
+        <div class="row flex-grow-1 align-items-right">
+          <div class="col-auto">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" :class="tab === 'nieuw' ? 'active' : ''" href="#" @click="tab='nieuw'">Nieuw</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" :class="tab === 'ingepland' ? 'active' : ''" href="#" @click="tab='ingepland'; window.drawIngepland()">Ingepland</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" :class="tab === 'te-factureren' ? 'active' : ''" href="#" @click="tab='te-factureren'">Te factureren</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" :class="tab === 'archief' ? 'active' : ''" href="#" @click="tab='archief'">Archief</a>
+              </li>
+            </ul>
+          </div>
+          {{-- <div class="col-auto">
+            <div class="dropdown">
+              <button type="button" class="btn btn-white btn-sm w-100" id="usersFilterDropdown" data-bs-toggle="collapse" data-bs-target="#filterDropdown" aria-expanded="false">
+                <i class="fas fa-filter me-1"></i> Filter
+              </button>
+  
+              <div id="filterDropdown" class="collapse dropdown-menu-sm-end dropdown-card card-dropdown-filter-centered" aria-labelledby="usersFilterDropdown" style="min-width: 22rem;">
+                <!-- Card -->
+                <div class="card">
+                  <div class="card-header card-header-content-between">
+                    <h5 class="card-header-title">Filter users</h5>
+  
+                    <!-- Toggle Button -->
+                    <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm ms-2">
+                      <i class="bi-x-lg"></i>
+                    </button>
+                    <!-- End Toggle Button -->
                   </div>
-                </div></td>
-            </tr>
-            @endforeach
-
-            </tbody>
-          </table>
+  
+                  <div class="card-body">
+                    <form>
+                      <div class="row">
+                        <div class="col-sm mb-4">
+                          <small class="text-cap text-body">Position</small>
+  
+                          <!-- Select -->
+                          <div class="tom-select-custom">
+                            <select class="js-select js-datatable-filter form-select form-select-sm tomselected ts-hidden-accessible" data-target-column-index="2" data-hs-tom-select-options="{
+                                      &quot;placeholder&quot;: &quot;Any&quot;,
+                                      &quot;searchInDropdown&quot;: false,
+                                      &quot;hideSearch&quot;: true,
+                                      &quot;dropdownWidth&quot;: &quot;10rem&quot;
+                                    }" id="tomselect-1" tabindex="-1">
+                              <option value="">Any</option>
+                              <option value="Accountant">Accountant</option>
+                              <option value="Co-founder">Co-founder</option>
+                              <option value="Designer">Designer</option>
+                              <option value="Developer">Developer</option>
+                              <option value="Director">Director</option>
+                            </select><div class="ts-wrapper js-select js-datatable-filter form-select form-select-sm single plugin-change_listener plugin-hs_smart_position"><div class="ts-control"><div class="ts-custom-placeholder">Any</div></div><div class="tom-select-custom"><div class="ts-dropdown single plugin-change_listener plugin-hs_smart_position" style="display: none;"><div role="listbox" tabindex="-1" class="ts-dropdown-content" id="tomselect-1-ts-dropdown"></div></div></div></div>
+                            <!-- End Select -->
+                          </div>
+                        </div>
+                        <!-- End Col -->
+  
+                        <div class="col-sm mb-4">
+                          <small class="text-cap text-body">Status</small>
+  
+                          <select name="" id="statusSelect">
+                            <option value=""></option>
+                            <option value="f"><span class="legend-indicator bg-success"></span>Completed</span></option>
+                          </select>
+                        </div>
+                        <!-- End Col -->
+  
+                      </div>
+                      <!-- End Row -->
+  
+                      <div class="d-grid">
+                        <a class="btn btn-primary" href="javascript:;">Apply</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- End Card -->
+              </div>
+            </div>
+          </div> --}}
+          <div class="col-auto ms-auto">
+              <!-- Filter -->
+              <form class="mt-3">
+                <!-- Search -->
+                <div class="input-group input-group-merge input-group-flush">
+                  <div class="input-group-prepend input-group-text">
+                    <i class="fas fa-search"></i>
+                  </div>
+                  <input id="tableSearch" type="search" class="form-control" placeholder="Opdracht zoeken" aria-label="Opdracht zoeken">
+                </div>
+                <!-- End Search -->
+              </form>
+              <!-- End Filter -->
+          </div>
         </div>
-        <!-- End Table -->
+        
+      </div>
+      <!-- End Header -->
+        @include('opdracht.tables.nieuw')
+        @include('opdracht.tables.ingepland')
       
         <!-- Footer -->
         <div class="card-footer">
           <!-- Pagination -->
           <div class="d-flex justify-content-center justify-content-sm-end">
-            <nav id="datatableWithPaginationPagination" aria-label="Activity pagination"></nav>
+            <nav id="paginationNav" aria-label="Activity pagination"></nav>
           </div>
           <!-- End Pagination -->
         </div>
         <!-- End Footer -->
       </div>
-
-<!-- Modal -->
-<div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  
+  <!-- Modal -->
+  <div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <form action="{{route('opdracht.verwijderen')}}" method="POST">
@@ -106,8 +144,10 @@
       </div>
       </form>
   </div>
+  </div>
+  <!-- End Modal -->
+
 </div>
-<!-- End Modal -->
 
 
 </x-app-layout>

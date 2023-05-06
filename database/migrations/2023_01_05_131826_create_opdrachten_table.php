@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('opdrachten', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('status')->default('nieuw');
             $table->date('start_datum');
             $table->time('start_tijd')->nullable();
             $table->date('eind_datum');
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->text('titel');
             $table->text('omschrijving');
             $table->bigInteger('aannemer_user_id') // moet foreignId worden
-                // ->constrained('users')
                 ->nullable();
         });
     }

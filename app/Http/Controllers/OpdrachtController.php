@@ -13,8 +13,12 @@ use App\Models\Opdracht;
 use App\Models\User;
 use App\Services\MoneybirdContactService;
 
+use \Carbon\Carbon;
+
 class OpdrachtController extends Controller
 {
+    // Views
+
     public function list(Request $request): View
     {
         $opdrachten = Opdracht::all()->map(function($opdracht) {
@@ -37,7 +41,32 @@ class OpdrachtController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function bewerken(Request $request): View
+    {
+        $opdracht = Opdracht::find($request->opdracht);
+
+        $imageUrls = Storage::files('public/opdrachten/' . $opdracht->id . '/fotos');
+        $imageUrls = collect($imageUrls)->map(function($image) {
+            return Storage::url($image);
+        });
+
+        return view('opdracht.bewerken', [
+            'opdracht' => $opdracht,
+            'aannemerList' => User::all()->where(function($user) {
+                return $user->hasRole('Aannemer');
+            }),
+            'imageUrlList' => $imageUrls,
+        ]);
+    }
+    
+    public function calendar(Request $request): View
+    {
+        return view('opdracht.calendar');
+    }
+
+    // Post actions (with redirects)
+
+    public function store(Request $request): Redirect
     {
         $files = $request->file('fotos');
         if($request->hasFile('fotos')) {
@@ -85,24 +114,6 @@ class OpdrachtController extends Controller
         return Redirect::route('opdracht.list');
     }
 
-    public function bewerken(Request $request)
-    {
-        $opdracht = Opdracht::find($request->opdracht);
-
-        $imageUrls = Storage::files('public/opdrachten/' . $opdracht->id . '/fotos');
-        $imageUrls = collect($imageUrls)->map(function($image) {
-            return Storage::url($image);
-        });
-
-        return view('opdracht.bewerken', [
-            'opdracht' => $opdracht,
-            'aannemerList' => User::all()->where(function($user) {
-                return $user->hasRole('Aannemer');
-            }),
-            'imageUrlList' => $imageUrls,
-        ]);
-    }
-
     public function update(Request $request)
     {
         $validated = $request->validate([
@@ -124,14 +135,59 @@ class OpdrachtController extends Controller
         return back()->with('successMessage', 'Wijzigingen opgeslagen');
     }
 
-    public function calendar(Request $request): View
-    {
-        return view('opdracht.calendar');
-    }
-
     public function verwijderen(Request $request)
     {
         Opdracht::destroy($request->opdracht_verwijder_id);
         return back()->with('successMessage', 'De opdracht is verwijderd uit het systeem');
+    }
+
+    // API
+    public static function getCalendarOpdrachten(Request $request): Object
+    {
+        $start = Carbon::parse($request->query('start'));
+        $end = Carbon::parse($request->query('end'));
+        $opdrachten = Opdracht::where([
+            ['start_datum', '>=', $start],
+            ['start_datum', '<=', $end],
+        ])
+            ->orWhere([
+                ['eind_datum', '>=', $start],
+                ['eind_datum', '<=', $end],
+            ])
+            ->orWhere([
+                ['start_datum', '<=', $start],
+                ['eind_datum', '>=', $end],
+            ])
+            ->get();
+
+        $eventsJson = $opdrachten->map(function($opdracht) {
+            $titlePrefix = $opdracht->aannemerUser ? $opdracht->aannemerUser->displayname() . ': ' : '';
+            return [
+                "title" => $titlePrefix . $opdracht->titel,
+                "start" => $opdracht->start_datum,
+                "end" => $opdracht->eind_datum,
+                "extendedProps" => [
+                    "opdrachtId" => $opdracht->id,
+                    "aannemerNaam" => $opdracht->aannemerUser?->displayName(),
+                ],
+            ];
+        });
+
+        return $eventsJson;
+    }
+
+    public function getOpdrachten(Request $request)
+    {
+        $opdrachten = Opdracht::all()
+            ->where('status', $request->query("status"))
+            ->map(function($opdracht) {
+            $moneybirdContact = $opdracht->moneybirdContact;
+            $aannemer = $opdracht->aannemerUser;
+            $opdracht['naamKlant'] = $moneybirdContact?->displayName();
+            $opdracht["aannemer"] = $aannemer?->displayName();
+            return $opdracht;
+        });
+
+        return ['data' => $opdrachten];
     }
 }

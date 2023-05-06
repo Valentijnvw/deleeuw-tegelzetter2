@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MoneybirdController;
-use App\Http\Controllers\Api\CalendarEventController;
+// use App\Http\Controllers\Api\CalendarEventController;
+use App\Http\Controllers\OpdrachtController;
 
 
 /*
@@ -23,4 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/moneybird-test", [MoneybirdController::class, 'userSearch']);
 
-Route::get("/calendar/opdrachten", [CalendarEventController::class, 'getOpdrachten'])->name('api.calendar.opdrachten');
+Route::get('/getOpdrachten', [OpdrachtController::class, 'getOpdrachten'])->name('api.getOpdrachten');
+
+Route::get("/calendar/opdrachten", [OpdrachtController::class, 'getCalendarOpdrachten'])->name('api.calendar.opdrachten');
